@@ -1,0 +1,66 @@
+---
+engine: knitr
+---
+
+# Objects
+
+\[...\]
+
+### Tipo & Forma
+
+Vamos nos aprofundar um pouco mais. Ao lidar formalmente com dados, **devemos ter mente que eles são compostos por uma ou mais variáveis e seus valores**. *Uma variável é uma dimensão ou propriedade que descreve uma unidade de observação* (por exemplo, uma pessoa) e normalmente pode assumir valores diferentes. Por outro lado, os *valores são as instâncias concretas que uma variável atribui a cada unidade de observação e são ainda caracterizados por seu intervalo* (por exemplo, valores categóricos versus valores contínuos) *e seu tipo* (por exemplo, valores lógicos, numéricos ou de caracteres). Estaremos interessados no *tipo* dos dados. A @tbl-data-types apresenta os que podem aparecer com maior frequência.
+
+```{r}
+#| label: tbl-data-types
+#| echo: false
+#| message: false
+#| tbl-cap: Tipos mais comuns de dados
+
+data.frame(tipo = c("Númerico", 
+                    "Texto *(string)*", 
+                    "Lógico", 
+                    "Tempo"),
+           
+           descricao = c("números do tipo *integer* (inteiro) ou *double* (reais)",
+                         "caracteres (letras, palavras ou setenças)", 
+                         "valores verdade do tipo lógico (valores booleanos)",
+                         "datas e horas"),
+           
+           exemplo = c("1, 3.2, 0.89", 
+                       "\"Ana jogou bola\"",
+                       "TRUE, FALSE, NA", 
+                       "14/04/1999")) |> 
+  
+  knitr::kable(align = "c", 
+               col.names = c("Tipo", "Serve para representar...", "Exemplo"))
+```
+
+Voltando ao primeiro exemplo, uma pessoa pode ser descrita pelas variáveis *nome*, *número de horas dormidas* e *se dormiu ou não mais de oito horas*. Os valores correspondentes a essas variáveis seriam do tipo texto (por exemplo, “Pedro”), numéricos (número de horas) e lógicos (`TRUE` ou `FALSE`, definido em função do tempo descansado[^1]). **Note a diferença entre *dado* e *valor*.** O número 10 é um valor, sem significado. Por outro lado, *"10 horas dormidas"* é um dado, caracterizado pelo valor 10 e pela variável *"horas dormidas"*.
+
+[^1]: Se o número de horas que a pessoa descansou for maior do que 8, então a variável deverá apresentar valor igual a `TRUE` – ou seja, é verdade que a pessoa dormiu mais de 8 horas. Caso contrário, `FALSE`.
+
+Outro aspecto importante sobre os dados está em sua forma, ou seja, como os dados podem ser organizados. A @tbl-data-shapes apresenta as formas mais comuns de organização.
+
+```{r}
+#| label: tbl-data-shapes
+#| echo: false
+#| message: false
+#| tbl-cap: Formas pelas quais os dados podem ser organizados
+
+data.frame(formato = c("Escalar", 
+                       "Retangular",
+                       "Não-retangular"),
+           
+           descricao = c("elementos individuais",
+                         "dados organizados em $i$ linhas e $j$ colunas", 
+                         "junção de uma ou mais estruturas de dados"),
+           
+           exemplo = c("\"AB\", 4, TRUE", 
+                       "Vetores e Tabelas de Dados",
+                       "Listas")) |> 
+  
+  knitr::kable(align = "c", 
+               col.names = c("Formato", "Os dados se apresentam como...", "Exemplo"))
+```
+
+\[...\]

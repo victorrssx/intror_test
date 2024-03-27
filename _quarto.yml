@@ -1,0 +1,33 @@
+project:
+  type: book
+  output-dir: docs
+
+lang: pt
+
+book:
+  title: "R e RStudio para Iniciantes"
+  subtitle: "Material de Apoio para Cursos Quantitativos do <br> Instituto de Economia da Universidade Federal do Rio de Janeiro (IE/UFRJ)"
+  
+  sidebar: 
+    logo: logo_gpeq_html.png
+  
+  favicon: logo_gpeq_html.png
+  author: "GPEQ/UFRJ"
+  date: last-modified
+  
+  chapters:
+    - index.qmd
+    
+  downloads: [pdf, epub]
+  sharing: [twitter, facebook]
+
+format:
+  html:
+    theme: cosmo
+    fontcolor: black
+  
+    css: styles.css
+    
+  pdf: default
+
+editor: visual
