@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.551">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>R e RStudio para Iniciantes - 2&nbsp; Objetos</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./prim-passos.html" rel="next">
+<link href="./index.html" rel="prev">
+<link href="./logo_gpeq_html.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Nenhum resultado",
+    "search-matching-documents-text": "documentos correspondentes",
+    "search-copy-link-title": "Copiar link para a busca",
+    "search-hide-matches-text": "Esconder correspondências adicionais",
+    "search-more-match-text": "mais correspondência neste documento",
+    "search-more-matches-text": "mais correspondências neste documento",
+    "search-clear-button-title": "Limpar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Procurar"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./objetos.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Objetos</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./logo_gpeq_html.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">R e RStudio para Iniciantes</a> 
+        <div class="sidebar-tools-main">
+    <div class="dropdown">
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download"><i class="bi bi-download"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./R-e-RStudio-para-Iniciantes.pdf">
+              <i class="bi bi-bi-file-pdf pe-1"></i>
+            Download PDF
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./R-e-RStudio-para-Iniciantes.epub">
+              <i class="bi bi-bi-journal pe-1"></i>
+            Download ePub
+            </a>
+          </li>
+      </ul>
+    </div>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-1" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-1">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+              <i class="bi bi-bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Procurar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Objects</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./objetos.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Objetos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prim-passos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Primeiros passos</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Índice</h2>
+   
+  <ul>
+  <li><a href="#dados" id="toc-dados" class="nav-link active" data-scroll-target="#dados"><span class="header-section-number">2.1</span> Dados</a>
+  <ul class="collapse">
+  <li><a href="#tipo-forma" id="toc-tipo-forma" class="nav-link" data-scroll-target="#tipo-forma"><span class="header-section-number">2.1.1</span> Tipo &amp; Forma</a></li>
+  </ul></li>
+  <li><a href="#estruturas-de-dados-no-r" id="toc-estruturas-de-dados-no-r" class="nav-link" data-scroll-target="#estruturas-de-dados-no-r"><span class="header-section-number">2.2</span> Estruturas de Dados no R</a>
+  <ul class="collapse">
+  <li><a href="#criando-e-armazenando-objetos-na-memória" id="toc-criando-e-armazenando-objetos-na-memória" class="nav-link" data-scroll-target="#criando-e-armazenando-objetos-na-memória"><span class="header-section-number">2.2.1</span> Criando e armazenando objetos na memória</a></li>
+  <li><a href="#valor-único" id="toc-valor-único" class="nav-link" data-scroll-target="#valor-único"><span class="header-section-number">2.2.2</span> Valor único</a></li>
+  <li><a href="#vetor" id="toc-vetor" class="nav-link" data-scroll-target="#vetor"><span class="header-section-number">2.2.3</span> Vetor</a></li>
+  <li><a href="#matriz" id="toc-matriz" class="nav-link" data-scroll-target="#matriz"><span class="header-section-number">2.2.4</span> Matriz</a></li>
+  <li><a href="#data-frame" id="toc-data-frame" class="nav-link" data-scroll-target="#data-frame"><span class="header-section-number">2.2.5</span> Data frame</a></li>
+  <li><a href="#lista" id="toc-lista" class="nav-link" data-scroll-target="#lista"><span class="header-section-number">2.2.6</span> Lista</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Objetos</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Na apresentação dessa parte do material, trouxemos uma citação que, em parte, dizia:</p>
+<blockquote class="blockquote">
+<p><strong><em>Everything that exists is an object.</em></strong></p>
+</blockquote>
+<p><strong>Um objeto é simplesmente um nome que guarda um valor ou código.</strong> Não há como ser mais direto: tudo que existe no R é um <em>objeto, inclusive as funções que veremos no capítulo seguinte</em>. Nesse capítulo, veremos com detalhe os objetos que são designados à <em>armazenar dados</em>. Antes, no entanto, vamos dar um passo para trás e explicar o que são dados.</p>
+<section id="dados" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="dados"><span class="header-section-number">2.1</span> Dados</h2>
+<p>Segundo a Oxford Languages, dados são</p>
+<blockquote class="blockquote">
+<p>fatos e estatísticas coletadas de forma conjunta para referência ou análise.</p>
+</blockquote>
+<p><strong>Na prática, dados nos mostram informações sobre determinado indivíduo ou situação que procuramos descrever, seja uma pessoa, instituição, comportamento, condição geográfica, etc.</strong> O número de horas que você dormiu essa noite é um dado. A lista que relata quem é ou não calvo na sua família é uma <em>coleção</em> de dados. A expectativa, hoje, de quanto será a inflação acumulada nos próximos 12 meses é um dado. A variação percentual do Produto Interno Bruto (PIB) real no último trimestre é um dado. A lista que mostra a sequência de variações do PIB real nos últimos dez trimestres é uma <em>série temporal</em>, isto é, dados em sequência ao longo do tempo.</p>
+<section id="tipo-forma" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="tipo-forma"><span class="header-section-number">2.1.1</span> Tipo &amp; Forma</h3>
+<p>Vamos nos aprofundar um pouco mais. Ao lidar formalmente com dados, <strong>devemos ter mente que eles são compostos por uma ou mais variáveis e seus valores</strong>. <em>Uma variável é uma dimensão ou propriedade que descreve uma unidade de observação</em> (por exemplo, uma pessoa) e normalmente pode assumir valores diferentes. Por outro lado, os <em>valores são as instâncias concretas que uma variável atribui a cada unidade de observação e são ainda caracterizados por seu intervalo</em> (por exemplo, valores categóricos versus valores contínuos) <em>e seu tipo</em> (por exemplo, valores lógicos, numéricos ou de caracteres). Estaremos interessados no <em>tipo</em> dos dados. A <a href="#tbl-data-types" class="quarto-xref">Tabela&nbsp;<span class="quarto-unresolved-ref">tbl-data-types</span></a> apresenta os que podem aparecer com maior frequência.</p>
+<div class="cell">
+<div id="tbl-data-types" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-data-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabela&nbsp;2.1: Tipos mais comuns de dados
+</figcaption>
+<div aria-describedby="tbl-data-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 61%">
+<col style="width: 19%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Tipo</th>
+<th style="text-align: center;">Serve para representar…</th>
+<th style="text-align: center;">Exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Númerico</td>
+<td style="text-align: center;">números do tipo <em>integer</em> (inteiro) ou <em>double</em> (reais)</td>
+<td style="text-align: center;">1, 3.2, 0.89</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Texto <em>(string)</em></td>
+<td style="text-align: center;">caracteres (letras, palavras ou setenças)</td>
+<td style="text-align: center;">“Ana jogou bola”</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Lógico</td>
+<td style="text-align: center;">valores verdade do tipo lógico (valores booleanos)</td>
+<td style="text-align: center;">TRUE, FALSE, NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Tempo</td>
+<td style="text-align: center;">datas e horas</td>
+<td style="text-align: center;">14/04/1999</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Voltando ao primeiro exemplo, uma pessoa pode ser descrita pelas variáveis <em>nome</em>, <em>número de horas dormidas</em> e <em>se dormiu ou não mais de oito horas</em>. Os valores correspondentes a essas variáveis seriam do tipo texto (por exemplo, “Pedro”), numéricos (número de horas) e lógicos (<code>TRUE</code> ou <code>FALSE</code>, definido em função do tempo descansado<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>). <strong>Note a diferença entre <em>dado</em> e <em>valor</em>.</strong> O número 10 é um valor, sem significado. Por outro lado, <em>“10 horas dormidas”</em> é um dado, caracterizado pelo valor 10 e pela variável <em>“horas dormidas”</em>.</p>
+<p>Outro aspecto importante sobre os dados está em sua forma, ou seja, como os dados podem ser organizados. A <a href="#tbl-data-shapes" class="quarto-xref">Tabela&nbsp;<span class="quarto-unresolved-ref">tbl-data-shapes</span></a> apresenta as formas mais comuns de organização.</p>
+<div class="cell">
+<div id="tbl-data-shapes" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-data-shapes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabela&nbsp;2.2: Formas pelas quais os dados podem ser organizados
+</figcaption>
+<div aria-describedby="tbl-data-shapes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 51%">
+<col style="width: 30%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Formato</th>
+<th style="text-align: center;">Os dados se apresentam como…</th>
+<th style="text-align: center;">Exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Escalar</td>
+<td style="text-align: center;">elementos individuais</td>
+<td style="text-align: center;">“AB”, 4, TRUE</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Retangular</td>
+<td style="text-align: center;">dados organizados em <span class="math inline">\(i\)</span> linhas e <span class="math inline">\(j\)</span> colunas</td>
+<td style="text-align: center;">Vetores e Tabelas de Dados</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Não-retangular</td>
+<td style="text-align: center;">junção de uma ou mais estruturas de dados</td>
+<td style="text-align: center;">Listas</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Um escalar é um elemento único, que pode ser de qualquer tipo. Ou seja, a representação elementar de um dado se dá através de um escalar! Por exemplo, o tipo sanguíneo de determinada pessoa, representado pelos caracteres “AB”, é um escalar do tipo texto. Você pode pensar no escalar como um dado organizado em 1 linha e 1 coluna.</p>
+<p>Por sua vez, dados retangulares são àqueles cuja organização ocorre em <span class="math inline">\(i\)</span> linhas e <span class="math inline">\(j\)</span> colunas, tal que <span class="math inline">\(i,j \in \mathbb{N}\)</span> e <span class="math inline">\(i &gt; 1\)</span> ou <span class="math inline">\(j &gt; 1\)</span>. As formas retangulares mais comuns são <em>vetores</em>, <em>matrizes</em> e <em>tabelas de dados</em>. Uma matriz é uma forma de organização de dados <em>númericos</em> em em <span class="math inline">\(i\)</span> linhas e <span class="math inline">\(j\)</span> colunas. Quando uma matriz possui <span class="math inline">\(i\)</span> linhas e <span class="math inline">\(1\)</span> coluna <em>ou</em> <span class="math inline">\(1\)</span> linha e <span class="math inline">\(j\)</span> colunas, chamamos de vetor-coluna e vetor-linha, respectivamente; em muitos casos, chamamos apenas de <em>vetor</em>. Assim, o vetor é um caso especial de matriz unidimensional. As tabelas de dados, por outro lado, possuem <span class="math inline">\(i\)</span> linhas e <span class="math inline">\(j\)</span> colunas, tal que <span class="math inline">\(i &gt; 1\)</span> e <span class="math inline">\(j &gt; 1\)</span>. Além disso, aceitam todos os tipos de dado – por exemplo, númericos, de textos ou lógicos – em qualquer que seja a combinação de linha e coluna.</p>
+<p>Por sua vez, dados não-retangulares se referem a toda organização de dados que não seja feita em linhas e colunas relacionadas entre si. A forma mais comum é a lista. Observe um exemplo abaixo: cada característica pode ser entendida como um elemento de uma lista. Apesar de pertencerem a mesma estrutura, os elementos não se comunicam entre si.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">&nbsp;</td>
+<td style="text-align: left;">&nbsp;</td>
+<td style="text-align: left;">&nbsp;</td>
+<td style="text-align: left;">&nbsp;</td>
+<td style="text-align: left;">&nbsp;</td>
+<td style="text-align: left;">&nbsp;</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&nbsp;</td>
+<td style="text-align: left;">Jorge</td>
+<td style="text-align: left;">Laís</td>
+<td style="text-align: left;">Matheus</td>
+<td style="text-align: left;">Laura</td>
+<td style="text-align: left;">Nathália</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Gênero</td>
+<td style="text-align: left;">Masculino</td>
+<td style="text-align: left;">Feminino</td>
+<td style="text-align: left;">Masculino</td>
+<td style="text-align: left;">Feminino</td>
+<td style="text-align: left;">Feminino</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&nbsp;</td>
+<td style="text-align: left;">&nbsp;</td>
+<td style="text-align: left;">&nbsp;</td>
+<td style="text-align: left;">&nbsp;</td>
+<td style="text-align: left;">&nbsp;</td>
+<td style="text-align: left;">&nbsp;</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&nbsp;</td>
+<td style="text-align: left;">Jorge</td>
+<td style="text-align: left;">Laís</td>
+<td style="text-align: left;">Matheus</td>
+<td style="text-align: left;">Laura</td>
+<td style="text-align: left;">Nathália</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Idade</td>
+<td style="text-align: left;">18</td>
+<td style="text-align: left;">23</td>
+<td style="text-align: left;">22</td>
+<td style="text-align: left;">21</td>
+<td style="text-align: left;">21</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&nbsp;</td>
+<td style="text-align: left;">&nbsp;</td>
+<td style="text-align: left;">&nbsp;</td>
+<td style="text-align: left;">&nbsp;</td>
+<td style="text-align: left;">&nbsp;</td>
+<td style="text-align: left;">&nbsp;</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&nbsp;</td>
+<td style="text-align: left;">Jorge</td>
+<td style="text-align: left;">Laís</td>
+<td style="text-align: left;">Matheus</td>
+<td style="text-align: left;">Laura</td>
+<td style="text-align: left;">Nathália</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Altura (cm)</td>
+<td style="text-align: left;">180</td>
+<td style="text-align: left;">170</td>
+<td style="text-align: left;">170</td>
+<td style="text-align: left;">175</td>
+<td style="text-align: left;">168</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&nbsp;</td>
+<td style="text-align: left;">&nbsp;</td>
+<td style="text-align: left;">&nbsp;</td>
+<td style="text-align: left;">&nbsp;</td>
+<td style="text-align: left;">&nbsp;</td>
+<td style="text-align: left;">&nbsp;</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&nbsp;</td>
+<td style="text-align: left;">Jorge</td>
+<td style="text-align: left;">Laís</td>
+<td style="text-align: left;">Matheus</td>
+<td style="text-align: left;">Laura</td>
+<td style="text-align: left;">Nathália</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Peso (kg)</td>
+<td style="text-align: left;">76</td>
+<td style="text-align: left;">65</td>
+<td style="text-align: left;">70</td>
+<td style="text-align: left;">68</td>
+<td style="text-align: left;">66</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&nbsp;</td>
+<td style="text-align: left;">&nbsp;</td>
+<td style="text-align: left;">&nbsp;</td>
+<td style="text-align: left;">&nbsp;</td>
+<td style="text-align: left;">&nbsp;</td>
+<td style="text-align: left;">&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Nesse caso em específico, conseguimos fazer a transição para uma tabela (forma retangular) pois todos os elementos são são características das mesmas pessoas. Em uma tabela de dados, automaticamente temos uma relação entre os dados: cada linha contém características de uma unidade específica.</p>
+<div class="cell">
+<div id="tbl-tabela-retangular" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl quarto-uncaptioned" id="tbl-tabela-retangular-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabela&nbsp;2.3
+</figcaption>
+<div aria-describedby="tbl-tabela-retangular-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Nome</th>
+<th style="text-align: center;">Gênero</th>
+<th style="text-align: center;">Idade</th>
+<th style="text-align: center;">Altura (cm)</th>
+<th style="text-align: center;">Peso (kg)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Jorge</td>
+<td style="text-align: center;">Masculino</td>
+<td style="text-align: center;">18</td>
+<td style="text-align: center;">180</td>
+<td style="text-align: center;">76</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Laís</td>
+<td style="text-align: center;">Feminino</td>
+<td style="text-align: center;">23</td>
+<td style="text-align: center;">170</td>
+<td style="text-align: center;">65</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Matheus</td>
+<td style="text-align: center;">Masculino</td>
+<td style="text-align: center;">22</td>
+<td style="text-align: center;">175</td>
+<td style="text-align: center;">70</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Laura</td>
+<td style="text-align: center;">Feminino</td>
+<td style="text-align: center;">21</td>
+<td style="text-align: center;">181</td>
+<td style="text-align: center;">68</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Nathália</td>
+<td style="text-align: center;">Feminino</td>
+<td style="text-align: center;">21</td>
+<td style="text-align: center;">168</td>
+<td style="text-align: center;">66</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+</section>
+<section id="estruturas-de-dados-no-r" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="estruturas-de-dados-no-r"><span class="header-section-number">2.2</span> Estruturas de Dados no R</h2>
+<p>Na seção anterior, vimos os conceitos de <em>tipo</em> e <em>forma</em>. Tenha em mente que são duas definições que existem independentemente de qualquer linguagem de programação – elas versam sobre <em>dados</em> de forma geral.</p>
+<p>Por outro lado, agora veremos o conceito e alguns exemplos de <em>estrutura de dados</em> para o R. <strong>A estrutura de dados é a forma pela qual o R classificará um objeto em relação ao <em>tipo</em> e a <em>forma</em> dos dados que contém.</strong> Existe uma estrutura de dados para cada combinação de tipo e forma? <strong>Não.</strong> Compreender as principais estruturas disponíveis no R requer vê-las como uma combinação de</p>
+<ol type="a">
+<li><em>algum</em> formato de dados</li>
+<li>o fato de conterem um único ou vários tipos de dados</li>
+</ol>
+<section id="criando-e-armazenando-objetos-na-memória" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="criando-e-armazenando-objetos-na-memória"><span class="header-section-number">2.2.1</span> Criando e armazenando objetos na memória</h3>
+<p>Antes de conhecê-las, no entanto, vamos entender melhor os comandos para criar e armazenar <em>qualquer</em> objeto (seja ele para armazenar dados, como nesse capítulo, ou para criar funções, que serão vistas no próximo) na memória do R.</p>
+<p>Para <em>criar</em> e <em>armazenar</em> um objeto, sempre escreveremos inicialmente seu nome (escolhido por você), seguido de um dos <em>operadores</em> <em>de atribuição</em> (ou <em>assingment operators</em>, como são conhecidos) e, por fim, o objeto propriamente dito com as informações de nosso interesse. O principal operador de atribuição para se criar objetos é <code>&lt;-</code>. Outro operador que é comumente utilizado para cumprir a mesma tarefa é <code>=</code>. Ainda que exista uma leve diferença entre ambos, ao longo dos cursos será possível utilizar o operador de sua preferência. Por ser o ideal, utilizaremos <code>&lt;-</code> no restante do material.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>nome_do_objeto <span class="ot">&lt;-</span> <span class="er">&gt;</span>objeto com informações<span class="sc">&lt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>nome do objeto <span class="ot">=</span>  <span class="er">&gt;</span>objeto com informações<span class="sc">&lt;</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>No parágrafo anterior, observe que está escrito <em>‘criar e armazenar’</em>. Nós poderíamos simplesmente criar um objeto, sem armazená-lo na memória do R. Nesse caso, não teríamos o nome do objeto disponível na aba <strong>Environment</strong> (ou seja, ele não seria armazenado no nosso ambiente de trabalho) e seria bem mais complicado registrar todas as mudanças que viermos a fazer nele. Aconteceria apenas a ocorrência de uma única saída no Console com a estrutura do objeto criado (de forma semelhante ao que fizemos no capítulo anterior) – o quê não tem grande utilidade para nós, exceto caso você queira verificar a estrutura do objeto antes de realmente armazená-lo.</p>
+<p>Ao mesmo tempo, você irá perceber que a <em>criação e armazenamento de um objeto não implica sua visualização imediata</em>. Isso signfinica que, ao dar o comando para criar algum objeto, não acontecerá nada no Console. Você pode acabar achando que o processo falhou ou algo do tipo, mas não é nada disso! Como dissemos, a mudança ocorrerá na aba Environment, onde deverá aparecer o nome do novo objeto. Para visualizar o objeto criado, escreva seu nome e rode a linha de código. Agora sim o objeto aparecerá no Console.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>nome_do_objeto</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Se você criou e armazenou um objeto na memória, ele ficará por lá até que você encerre sua sessão atual (feche o RStudio) ou, então, que o remova. Para remover qualquer objeto basta escrever <code>rm(nome_do_objeto)</code>. Caso tenha o desejo de remover vários objetos, basta separar seus nomes com vírgula. Para remover <em>todos</em> os objetos que aparecem na aba Environment, use <code>rm(list = ls())</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(nome_do_objeto1)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(nome_do_objeto1, nome_do_objeto2, ...)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Observe no GIF abaixo como é na prática!</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/criando_objeto.gif" class="img-fluid quarto-figure quarto-figure-center figure-img" width="620"></p>
+</figure>
+</div>
+</section>
+<section id="valor-único" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="valor-único"><span class="header-section-number">2.2.2</span> Valor único</h3>
+<p>Ao criar um objeto com valor único, estamos armazenando um escalar que pode variar quanto ao tipo (por exemplo, númerico, <em>string</em> ou valor lógico). Nesse caso, a <em>estrutura</em> do objeto <em>será idêntica</em> ao <em>tipo</em> – o que faz sentido, afinal estamos falando de um objeto de uma única linha e coluna.</p>
+<section id="numérico" class="level4" data-number="2.2.2.1">
+<h4 data-number="2.2.2.1" class="anchored" data-anchor-id="numérico"><span class="header-section-number">2.2.2.1</span> Numérico</h4>
+<p>Um objeto <strong>númerico</strong> contém apenas um número (por exemplo, 1, 2, 4.13, <span class="math inline">\(\pi\)</span>, entre outros). Se quisessemos atribuir o valor numérico 5 à um objeto chamado <code>x</code>, como poderiamos fazer? Observe abaixo e replique no seu RStudio!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span> </span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Note que o Console não retorna nenhuma mensagem ou valor. Como dissemos na seção anterior, a única diferença que você deve ser capaz de observar é no painel Environment, no quadrante superior direito do RStudio. O nome do novo objeto aparecerá lá. Para que você possa visualizar o conteúdo do objeto criado, terá que escrever apenas seu nome e rodar a linha de código!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+</div>
+</section>
+<section id="textual" class="level4" data-number="2.2.2.2">
+<h4 data-number="2.2.2.2" class="anchored" data-anchor-id="textual"><span class="header-section-number">2.2.2.2</span> Textual</h4>
+<p>Uma <strong>sequência de caracteres</strong> (<em>character string</em>, ou apenas <em>string</em>) é um conjunto de caracteres dentro de um par de aspas e pode ou não incluir espaços. Por exemplo, “elevada” e “pressão arterial elevada” são objetos de caracteres com um único valor de <em>string</em>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="st">"pressão arterial elevada"</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>y</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "pressão arterial elevada"</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="vetor" class="level3" data-number="2.2.3">
+<h3 data-number="2.2.3" class="anchored" data-anchor-id="vetor"><span class="header-section-number">2.2.3</span> Vetor</h3>
+<p>Um <strong>vetor</strong> contém uma coleção ordenada de dados indexados pelos inteiros <span class="math inline">\(1, 2,..., n\)</span>, onde <span class="math inline">\(n\)</span> é o comprimento do vetor. <em>O vetor como estrutura de dados é a combinação da forma vetor com dados de um único tipo, não necessariamente numérico.</em> No exemplo abaixo, um vetor númerico, isto é, que contém apenas números.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">8</span>, <span class="dv">12</span>) </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>z</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  5  8 12</code></pre>
+</div>
+</div>
+<p><strong>Se você tentar criar um vetor contendo dois tipos de dados diferentes, ele converterá todos os dados para o tipo texto.</strong> A única exceção é com relação a entradas do tipo lógico <code>NA</code> <em>(Not Available)</em>, que representam a ausência de determinado dado.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="st">"texto"</span>, <span class="cn">TRUE</span>, <span class="cn">NA</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>z</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "5"     "texto" "TRUE"  NA     </code></pre>
+</div>
+</div>
+<p>É inegável que, a partir deste ponto, as estruturas começam a ficar mais interessantes. Lembre-se que o vetor tem uma dimensão e pode ter muitas informações armazenadas. É natural que, em determinadas situações, desejemos acessar apenas valores específicos dentre os que constam nele.</p>
+<p>Como podemos fazer isso? Note que podemos associar a cada elemento de um vetor um número, representando a linha ou coluna em que consta. A esse número chamamos de índice! Dessa forma, fica fácil acessar qualquer um de seus valores. Basta escrever, ao lado de seu nome e entre colchetes, o índice que está associado à este valor. Por exemplo, vamos acessar o segundo elemento do vetor <code>z</code> que acabamos de criar.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>z[<span class="dv">2</span>] <span class="co"># Acessando o segundo elemento de um vetor</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "texto"</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Outras formas de criar vetores (Opcional)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>                <span class="co"># Criando uma sequência de números de 1 a 7</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3 4 5 6 7</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">2</span>, <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">2</span>) <span class="co"># Criando um sequência de 2 a 10 pulando um número. </span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  2  4  6  8 10</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">3</span>, <span class="dv">5</span>)          <span class="co"># Repetindo o número 3, 5 vezes </span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3 3 3 3 3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="dv">3</span>)     <span class="co"># Repetindo o vetor (1,2), 3 vezes</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 1 2 1 2</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section id="fator" class="level4" data-number="2.2.3.1">
+<h4 data-number="2.2.3.1" class="anchored" data-anchor-id="fator"><span class="header-section-number">2.2.3.1</span> Fator</h4>
+<p>Um <strong>fator</strong> é um tipo especial de vetor que contém valores numéricos subjacentes <span class="math inline">\(1, 2,..., n\)</span>, mas cada um desses <span class="math inline">\(n\)</span> valores possui um rótulo de texto associado (que pode ou não ser o valor numérico). Esses valores rotulados são os <strong>níveis</strong> <em>(levels)</em> do fator. Um uso comum de um fator é armazenar uma variável categórica. <strong>Depois de criar um vetor de fator com níveis específicos, nenhum elemento desse vetor poderá assumir um valor que não seja um de seus níveis pré-atribuídos.</strong></p>
+<p>Você pode criar um fator a partir de um vetor de caracteres e o R assumirá que os valores únicos são os rótulos dos níveis. Por exemplo, no exemplo abaixo os níveis serão “lento”, “normal” e “rápido”.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"super rápido"</span>, <span class="st">"super lento"</span>, <span class="st">"normal"</span>, <span class="st">"super rápido"</span>, <span class="st">"normal"</span>))</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>y         <span class="co"># Rodar o vetor de fator também irá retornar os níveis</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] super rápido super lento  normal       super rápido normal      
+Levels: normal super lento super rápido</code></pre>
+</div>
+</div>
+<p>Se quiser alterar os rótulos, você pode fazê-lo atribuindo um novo valor aos seus níveis. Por exemplo, suponha que queiramos que os rótulos sejam maiúsculos.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(y) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Super Rápido"</span>, <span class="st">"Normal"</span>, <span class="st">"Super Lento"</span>) </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(y)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Super Rápido" "Normal"       "Super Lento" </code></pre>
+</div>
+</div>
+<p>Como alternativa, você pode atribuir novos rótulos de nível ao criar o fator. Isso tem a vantagem adicional de permitir que você decida em que ordem os níveis devem aparecer. Quando criamos o fator, R atribuiu automaticamente os níveis pegando os valores exclusivos de <code>y</code> e colocando-os em ordem alfabética. Por vários motivos (como criar um gráfico de barras posteriormente), você pode querer que os níveis estejam em uma ordem diferente. <strong>Você pode especificar a ordem dos níveis ao criar a variável, mas tome cuidado porque se você deixar de fora um valor que aparece nos dados esse valor acabará definido como ausente (</strong><code>NA</code><strong>)</strong>.</p>
+<p>No exemplo anterior, gostaríamos que a ordem fosse da velocidade menor para o maior.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Enter ORIGINAL values in levels </span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Enter the NEW level labels in labels </span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Make sure the orderings of levels and labels correspond </span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"super rápido"</span>, <span class="st">"super lento"</span>, <span class="st">"normal"</span>, <span class="st">"super rápido"</span>, <span class="st">"normal"</span>),              </span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"super lento"</span>, <span class="st">"normal"</span>, <span class="st">"super rápido"</span>), </span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Super Lento"</span>, <span class="st">"Normal"</span>, <span class="st">"Super Rápido"</span>)) </span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(y)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Super Lento"  "Normal"       "Super Rápido"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>y</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] Super Rápido Super Lento  Normal       Super Rápido Normal      
+Levels: Super Lento Normal Super Rápido</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="matriz" class="level3" data-number="2.2.4">
+<h3 data-number="2.2.4" class="anchored" data-anchor-id="matriz"><span class="header-section-number">2.2.4</span> Matriz</h3>
+<p>Uma <strong>matriz</strong> contém uma coleção bidimensional de dados indexados por pares de inteiros <span class="math inline">\((i, j)\)</span>. <em>A matriz como estrutura de dados é a combinação da forma matriz com dados de um único tipo, não necessariamente numérico.</em> Abaixo, uma matriz numérica.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">3</span>) </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    3    5
+[2,]    2    4    6</code></pre>
+</div>
+</div>
+<p>Assim como os vetores, as matrizes não podem conter valores de diferentes tipos. Se você tentar criar uma matriz contendo valores numéricos e de caracteres, por exemplo, ela converterá os valores numéricos em caracteres. Note que você pode definir o número de linhas e colunas que uma matriz venha a possuir.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="st">"c"</span>,<span class="st">"d"</span>,<span class="st">"e"</span>,<span class="st">"f"</span>), <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">2</span>) </span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>z</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,] "1"  "d" 
+[2,] "2"  "e" 
+[3,] "c"  "f" </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="st">"c"</span>,<span class="st">"d"</span>,<span class="st">"e"</span>,<span class="st">"f"</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">3</span>) </span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>z</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,] "1"  "c"  "e" 
+[2,] "2"  "d"  "f" </code></pre>
+</div>
+</div>
+<p>É importante ressaltar que, no R, uma matriz criada com <span class="math inline">\(i\)</span> linhas e <span class="math inline">\(1\)</span> coluna (ou <span class="math inline">\(1\)</span> linha e <span class="math inline">\(j\)</span> colunas) continua sendo interpretada como uma matriz, ao invés de ser interpretada como vetor-coluna (ou vetor-linha).</p>
+<p>Como a matriz é um objeto de natureza bidimensional, podemos acessar seus elementos individuais através da inserção dos seus índices de linha <em>e</em> coluna. Por exemplo, para acessar o elemento presente na segunda linha e terceira coluna da matriz <code>z</code> que aramazenamos por último, rode:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>z[<span class="dv">2</span>,<span class="dv">3</span>]</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "f"</code></pre>
+</div>
+</div>
+<p>Outra forma de acessar algum dado específico da matriz é pensá-la como sendo um único vetor, o qual vai sendo repartido conforme termina o tamanho que você pré-selecionou paras colunas. Dessa forma, podemos retornar determinado elemento pensando em seu índice de vetor. Por exemplo, poderíamos acessar o dado <code>f</code> pensando que é o sexto elemento do equivalente ao vetor <code>c("a","b","c","d","e","f")</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>z[<span class="dv">6</span>]</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "f"</code></pre>
+</div>
+</div>
+<p>Ao mesmo tempo, podemos acessar apenas uma coluna ou linha específica. Para tal, selecione a coluna ou linha que deseja retornar e deixe a coordenada restante como espaço vazio. No código abaixo, vamos selecionar inicialmente a primeira linha da matriz <code>z</code> e, na sequência, sua terceira coluna.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>z[<span class="dv">1</span>,]</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "1" "c" "e"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>z[,<span class="dv">3</span>]</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "e" "f"</code></pre>
+</div>
+</div>
+</section>
+<section id="data-frame" class="level3" data-number="2.2.5">
+<h3 data-number="2.2.5" class="anchored" data-anchor-id="data-frame"><span class="header-section-number">2.2.5</span> Data frame</h3>
+<p>Como matrizes (e vetores) contêm dados de apenas um tipo (por exemplo, todas as células são dados numéricos, de caracteres ou lógicos), precisamos de outra estrutura de dados para dados heterogêneos.</p>
+<p>A necessidade de armazenar dados heterogêneos não é nada exótico ou incomum. Na verdade, mesmo os conjuntos de dados mais simples exigem a mistura de vários tipos de dados. Por exemplo, imagine que queremos armazenar um conjunto de dados que contém informações básicas sobre um grupo de pessoas, assim como na <a href="#tbl-tabela-retangular" class="quarto-xref">Tabela&nbsp;<span class="quarto-unresolved-ref">tbl-tabela-retangular</span></a>. Cada uma dessas cinco variáveis pode ser armazenada como um vetor (as duas primeiras do tipo caractere, as outras do tipo numérico). Para armazenar todas as cinco variáveis em uma única estrutura de dados, podemos combinar os cinco vetores em uma tabela retangular. As tabelas são a forma mais frequente de armazenar dados!</p>
+<p>E qual o nome da estrutura de dados que armazena tabelas de dados no R? São os <em>data frames! O data frame como estrutura de dados é a combinação da forma tabela e da presença de qualquer tipo de dado.</em> No <em>chunk</em> abaixo, vamos recriar a <a href="#tbl-tabela-retangular" class="quarto-xref">Tabela&nbsp;<span class="quarto-unresolved-ref">tbl-tabela-retangular</span></a> como exemplo.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>info_pessoas <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Nome =</span> <span class="fu">c</span>(<span class="st">"Jorge"</span>, <span class="st">"Laís"</span>, <span class="st">"Matheus"</span>, <span class="st">"Laura"</span>, <span class="st">"Nathália"</span>),</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>                           Gênero <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Masculino"</span>, <span class="st">"Feminino"</span>, <span class="st">"Masculino"</span>, <span class="st">"Feminino"</span>, <span class="st">"Feminino"</span>),</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">Idade =</span> <span class="fu">c</span>(<span class="dv">18</span>, <span class="dv">23</span>, <span class="dv">22</span>, <span class="dv">21</span>, <span class="dv">21</span>),</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">Altura =</span> <span class="fu">c</span>(<span class="dv">180</span>, <span class="dv">170</span>, <span class="dv">175</span>, <span class="dv">181</span>, <span class="dv">168</span>),</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>                           <span class="at">Peso =</span> <span class="fu">c</span>(<span class="dv">76</span>, <span class="dv">65</span>, <span class="dv">70</span>, <span class="dv">68</span>, <span class="dv">66</span>))</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>info_pessoas</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Nome    Gênero Idade Altura Peso
+1    Jorge Masculino    18    180   76
+2     Laís  Feminino    23    170   65
+3  Matheus Masculino    22    175   70
+4    Laura  Feminino    21    181   68
+5 Nathália  Feminino    21    168   66</code></pre>
+</div>
+</div>
+<p>Você pode acessar qualquer dado específico de um <em>data frame</em> a partir do mesmo procedimento utilizado com matrizes. Por exemplo, para acessar o dado contido na segunda linha da primeira coluna, basta rodar <code>info_pessoas[2,1]</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>info_pessoas[<span class="dv">2</span>,<span class="dv">1</span>]</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Laís"</code></pre>
+</div>
+</div>
+<p>De forma semelhante, podemos acessar uma coluna ou linha específica.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>info_pessoas[,<span class="dv">2</span>] <span class="co"># Retornando dados da segundo coluna</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Masculino" "Feminino"  "Masculino" "Feminino"  "Feminino" </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>info_pessoas[<span class="dv">1</span>,] <span class="co"># Retornando dados da primeira linha</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Nome    Gênero Idade Altura Peso
+1 Jorge Masculino    18    180   76</code></pre>
+</div>
+</div>
+<p>É interessante notar que um <em>data frame</em> pode ser pensado como a junção de múltiplos vetores-coluna, cada um representando determinada variável! Isso nos dá outra forma de selecionar colunas específicas: basta colocar entre colchetes o índice do vetor-coluna que você deseja selecionar. Note, no entanto, uma diferença: nesta <em>sintaxe</em>, o objeto que retornará ainda terá estrutura de um <em>data frame</em> (agora com cinco linhas e uma coluna) ao invés de vetor, como no <em>chunk</em> anterior.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>info_pessoas[<span class="dv">2</span>]</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Gênero
+1 Masculino
+2  Feminino
+3 Masculino
+4  Feminino
+5  Feminino</code></pre>
+</div>
+</div>
+</section>
+<section id="lista" class="level3" data-number="2.2.6">
+<h3 data-number="2.2.6" class="anchored" data-anchor-id="lista"><span class="header-section-number">2.2.6</span> Lista</h3>
+<p>Uma lista contém uma coleção ordenada de objetos, sendo que estes podem ser de tipos diferentes. <em>A lista como estrutura de dados é a combinação da forma lista (representando dados não-retangulares) e da presença de qualquer tipo de dado.</em> Na prática, uma lista pode aceitar <strong>qualquer</strong> objeto de dados como elemento – inclusive uma outra lista!</p>
+<p>Para que fique mais claro, abaixo está uma lista que contém um objeto com cada tipo de estrutura vista até agora! Colocamos nesta lista um valor único, um vetor, uma matriz e um data frame. Eles serão armazenados em um novo objeto, que nomeamos de <code>lista_exemplo</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>lista_exemplo <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">"5"</span>, <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>), <span class="dv">2</span>, <span class="dv">2</span>), info_pessoas)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Observe que a lista, apesar de poder contar com objetos de várias estruturas (e, consequentemente, dimensões), acaba por ter uma única dimensão. Você pode acessar seus elementos de forma <em>parecida</em> com o caso de um vetor. A diferença é que, no caso de uma lista, teremos que utilizar duplo colchetes. Abaixo, um exemplo de como acessar o quarto elemento da <code>lista_exemplo</code> – no caso, o <em>data frame</em> <code>info_pessoas</code> que criamos anteriormente.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>lista_exemplo[[<span class="dv">4</span>]]</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Nome    Gênero Idade Altura Peso
+1    Jorge Masculino    18    180   76
+2     Laís  Feminino    23    170   65
+3  Matheus Masculino    22    175   70
+4    Laura  Feminino    21    181   68
+5 Nathália  Feminino    21    168   66</code></pre>
+</div>
+</div>
+<p>Listas são mais úteis do que você pode estar pensando nesse momento. Elas permitem que você agrupe objetos de um mesmo assunto, mas com diferentes estruturas, em um único objeto ‘central’. Em muitos casos, facilita a organização.</p>
+
+
+</section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Se o número de horas que a pessoa descansou for maior do que 8, então a variável deverá apresentar valor igual a <code>TRUE</code> – ou seja, é verdade que a pessoa dormiu mais de 8 horas. Caso contrário, <code>FALSE</code>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiada");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiada");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="Objects">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Objects</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./prim-passos.html" class="pagination-link" aria-label="Primeiros passos">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Primeiros passos</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

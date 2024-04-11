@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="GPEQ/UFRJ">
 
-<title>R e RStudio para Iniciantes</title>
+<title>R e RStudio para Iniciantes - 3&nbsp; Primeiros passos</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -31,7 +64,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./objetos.html" rel="next">
+<link href="./objetos.html" rel="prev">
 <link href="./logo_gpeq_html.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -70,35 +103,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -112,7 +116,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Objects</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./prim-passos.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Primeiros passos</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -178,7 +182,7 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Objects</span></span></a>
   </div>
 </li>
@@ -190,7 +194,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./prim-passos.html" class="sidebar-item-text sidebar-link">
+  <a href="./prim-passos.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Primeiros passos</span></span></a>
   </div>
 </li>
@@ -204,10 +208,9 @@ window.Quarto = {
     <h2 id="toc-title">Índice</h2>
    
   <ul>
-  <li><a href="#objects" id="toc-objects" class="nav-link active" data-scroll-target="#objects"><span class="header-section-number">1</span> Objects</a>
-  <ul class="collapse">
-  <li><a href="#tipo-forma" id="toc-tipo-forma" class="nav-link" data-scroll-target="#tipo-forma"><span class="header-section-number">1.0.1</span> Tipo &amp; Forma</a></li>
-  </ul></li>
+  <li><a href="#operadores-aritméticos" id="toc-operadores-aritméticos" class="nav-link active" data-scroll-target="#operadores-aritméticos"><span class="header-section-number">3.1</span> Operadores Aritméticos</a></li>
+  <li><a href="#operadores-lógicos" id="toc-operadores-lógicos" class="nav-link" data-scroll-target="#operadores-lógicos"><span class="header-section-number">3.2</span> Operadores Lógicos</a></li>
+  <li><a href="#possíveis-complicações" id="toc-possíveis-complicações" class="nav-link" data-scroll-target="#possíveis-complicações"><span class="header-section-number">3.3</span> Possíveis complicações</a></li>
   </ul>
 </nav>
     </div>
@@ -216,27 +219,14 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">R e RStudio para Iniciantes</h1>
-<p class="subtitle lead">Material de Apoio para Cursos Quantitativos do <br> Instituto de Economia da Universidade Federal do Rio de Janeiro (IE/UFRJ)</p>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Primeiros passos</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Autor</div>
-    <div class="quarto-title-meta-contents">
-             <p>GPEQ/UFRJ </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Data de Publicação</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">27 de março de 2024</p>
-    </div>
-  </div>
   
     
   </div>
@@ -246,53 +236,93 @@ window.Quarto = {
 </header>
 
 
-<section id="objects" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Objects</h1>
-<p>[…]</p>
-<section id="tipo-forma" class="level3" data-number="1.0.1">
-<h3 data-number="1.0.1" class="anchored" data-anchor-id="tipo-forma"><span class="header-section-number">1.0.1</span> Tipo &amp; Forma</h3>
-<p>Vamos nos aprofundar um pouco mais. Ao lidar formalmente com dados, <strong>devemos ter mente que eles são compostos por uma ou mais variáveis e seus valores</strong>. <em>Uma variável é uma dimensão ou propriedade que descreve uma unidade de observação</em> (por exemplo, uma pessoa) e normalmente pode assumir valores diferentes. Por outro lado, os <em>valores são as instâncias concretas que uma variável atribui a cada unidade de observação e são ainda caracterizados por seu intervalo</em> (por exemplo, valores categóricos versus valores contínuos) <em>e seu tipo</em> (por exemplo, valores lógicos, numéricos ou de caracteres). Estaremos interessados no <em>tipo</em> dos dados. A <a href="#tbl-data-types" class="quarto-xref">Tabela&nbsp;<span class="quarto-unresolved-ref">tbl-data-types</span></a> apresenta os que podem aparecer com maior frequência.</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Partes deste capítulo são baseadas na seção <a href="https://livro.curso-r.com/3-2-r-como-calculadora.html">3.2 ‘R como calculadora’</a> do livro <em>Ciência de Dados em R</em>, feito pelo Curso-R. De qualquer modo, eventuais erros são inteiramente de nossa responsabilidade.</p>
+</div>
+</div>
+</div>
+<p>Como vimos nos capítulos anteriores, o papel do <strong>Console</strong> no R é interpretar os nossos comandos à luz da linguagem. Ele avalia o código que o passamos e devolve a saída correspondente — se tudo der certo — ou uma mensagem de erro — se o seu código tiver algum problema. Essa operação é chamada de <strong>avaliar</strong>, <strong>executar</strong> ou <strong>rodar</strong> o código. Para que seu código seja executado diretamente no Console, escreva-o e, na sequência, aperte <code>Enter</code>. A outra forma de executar uma expressão é escrever o código em um <em>script</em> no <strong>Editor</strong>, deixar o cursor em cima da linha e usar o atalho <code>Ctrl + Enter</code>. Assim, o comando é enviado para o Console, onde é diretamente executado.</p>
+<p>Nesse capítulo, você <em>rodará</em> suas primeiras linhas de código com intuito de realizar operações aritméticas como <em>adição</em>, <em>subtração</em>, <em>multiplicação</em> e <em>divisão</em>, além de comparações lógicas simples. O objetivo aqui não é te ensinar matemática básica, mas te preparar para a execução de linhas de código mais avançadas. É a forma mais fácil de um iniciante ganhar familiaridade e experiência prática com o R.</p>
+<section id="operadores-aritméticos" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="operadores-aritméticos"><span class="header-section-number">3.1</span> Operadores Aritméticos</h2>
+<p>De agora em diante, cada região sombreada de cinza representa código, ao passo que seu resultado estará exposto logo na sequência. Vamos começar com um exemplo simples:</p>
 <div class="cell">
-<div id="tbl-data-types" class="cell quarto-float anchored">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
+</div>
+</div>
+<p>Nesse caso, o nosso comando foi o código <code>1 + 1</code> e a saída foi o valor <code>2</code>. Como você pode reproduzir esse comando no RStudio? Inicialmente, copie o que está escrito acima ao clicar no símbolo de prancheta no canto superior direito da região sombreada. Na sequência, cole no Editor de Código e aperte <code>Ctrl + Enter</code> (ou então no Console, pressionando apenas <code>Enter</code>). Observe abaixo!</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/1mais1.gif" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>Tente agora jogar no Console a expressão: <code>2 * 2 - (4 + 4) / 2</code>. Deu zero? Pronto! Você já é capaz de pedir ao R para fazer <em>qualquer uma das quatro operações aritméticas básicas</em>. Repare que as operações e suas precedências são mantidas como na matemática, ou seja, divisão e multiplicação são calculadas antes da adição e subtração, além de os parênteses ditarem a ordem na qual serão realizadas. A seguir, apresentamos a <a href="#tbl-ope-mat" class="quarto-xref">Tabela&nbsp;<span class="quarto-unresolved-ref">tbl-ope-mat</span></a> resumindo como fazer as principais operações no R.</p>
+<div class="cell">
+<div id="tbl-ope-mat" class="cell quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-data-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Tabela&nbsp;1.1: Tipos mais comuns de dados
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ope-mat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabela&nbsp;3.1: Operadores matemáticos do R
 </figcaption>
-<div aria-describedby="tbl-data-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="tbl-ope-mat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
 <table class="do-not-create-environment cell table table-sm table-striped small">
-<colgroup>
-<col style="width: 19%">
-<col style="width: 61%">
-<col style="width: 19%">
-</colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: center;">Tipo</th>
-<th style="text-align: center;">Serve para representar…</th>
+<th style="text-align: center;">Operação</th>
+<th style="text-align: center;">Operador</th>
 <th style="text-align: center;">Exemplo</th>
+<th style="text-align: center;">Resultado</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">Númerico</td>
-<td style="text-align: center;">números do tipo <em>integer</em> (inteiro) ou <em>double</em> (reais)</td>
-<td style="text-align: center;">1, 3.2, 0.89</td>
+<td style="text-align: center;">Adição</td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">1 + 1</td>
+<td style="text-align: center;">2.00</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">Texto <em>(string)</em></td>
-<td style="text-align: center;">caracteres (letras, palavras ou setenças)</td>
-<td style="text-align: center;">“Ana jogou bola”</td>
+<td style="text-align: center;">Subtração</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">4 - 2</td>
+<td style="text-align: center;">2.00</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">Lógico</td>
-<td style="text-align: center;">valores verdade do tipo lógico (valores booleanos)</td>
-<td style="text-align: center;">TRUE, FALSE, NA</td>
+<td style="text-align: center;">Multiplicação</td>
+<td style="text-align: center;">*</td>
+<td style="text-align: center;">2 * 3</td>
+<td style="text-align: center;">6.00</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">Tempo</td>
-<td style="text-align: center;">datas e horas</td>
-<td style="text-align: center;">14/04/1999</td>
+<td style="text-align: center;">Divisão</td>
+<td style="text-align: center;">/</td>
+<td style="text-align: center;">5 / 3</td>
+<td style="text-align: center;">1.67</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Potenciação</td>
+<td style="text-align: center;">^</td>
+<td style="text-align: center;">4 ^ 2</td>
+<td style="text-align: center;">16.00</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Resto da Divisão</td>
+<td style="text-align: center;">%%</td>
+<td style="text-align: center;">5 %% 3</td>
+<td style="text-align: center;">2.00</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Parte Inteira da Divisão</td>
+<td style="text-align: center;">%/%</td>
+<td style="text-align: center;">5 %/% 3</td>
+<td style="text-align: center;">1.00</td>
 </tr>
 </tbody>
 </table>
@@ -301,44 +331,88 @@ Tabela&nbsp;1.1: Tipos mais comuns de dados
 </figure>
 </div>
 </div>
-<p>Voltando ao primeiro exemplo, uma pessoa pode ser descrita pelas variáveis <em>nome</em>, <em>número de horas dormidas</em> e <em>se dormiu ou não mais de oito horas</em>. Os valores correspondentes a essas variáveis seriam do tipo texto (por exemplo, “Pedro”), numéricos (número de horas) e lógicos (<code>TRUE</code> ou <code>FALSE</code>, definido em função do tempo descansado<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>). <strong>Note a diferença entre <em>dado</em> e <em>valor</em>.</strong> O número 10 é um valor, sem significado. Por outro lado, <em>“10 horas dormidas”</em> é um dado, caracterizado pelo valor 10 e pela variável <em>“horas dormidas”</em>.</p>
-<p>Outro aspecto importante sobre os dados está em sua forma, ou seja, como os dados podem ser organizados. A <a href="#tbl-data-shapes" class="quarto-xref">Tabela&nbsp;<span class="quarto-unresolved-ref">tbl-data-shapes</span></a> apresenta as formas mais comuns de organização.</p>
+</section>
+<section id="operadores-lógicos" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="operadores-lógicos"><span class="header-section-number">3.2</span> Operadores Lógicos</h2>
+<p>O R permite também testar comparações lógicas. Os valores lógicos básicos em R são <code>TRUE</code> (ou apenas <code>T</code>) e <code>FALSE</code> (ou apenas <code>F</code>). Por exemplo, podemos pedir ao R que nos diga se é verdadeiro que 5 é menor do que 3. Como a resposta é obviamente negativa, ele retornará <code>FALSE</code>, nos dizendo que a proposição que fizemos é falsa.</p>
 <div class="cell">
-<div id="tbl-data-shapes" class="cell quarto-float anchored">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">&lt;</span> <span class="dv">3</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+<p>Abaixo, introduzimos a <a href="#tbl-ope-log" class="quarto-xref">Tabela&nbsp;<span class="quarto-unresolved-ref">tbl-ope-log</span></a> com outros operadores lógicos da linguagem.</p>
+<div class="cell">
+<div id="tbl-ope-log" class="cell quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-data-shapes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Tabela&nbsp;1.2: Formas pelas quais os dados podem ser organizados
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ope-log-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabela&nbsp;3.2: Operadores lógicos do R
 </figcaption>
-<div aria-describedby="tbl-data-shapes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="tbl-ope-log-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
 <table class="do-not-create-environment cell table table-sm table-striped small">
 <colgroup>
-<col style="width: 17%">
-<col style="width: 51%">
-<col style="width: 30%">
+<col style="width: 21%">
+<col style="width: 10%">
+<col style="width: 55%">
+<col style="width: 11%">
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: center;">Formato</th>
-<th style="text-align: center;">Os dados se apresentam como…</th>
+<th style="text-align: center;">Operação</th>
+<th style="text-align: center;">Operador</th>
 <th style="text-align: center;">Exemplo</th>
+<th style="text-align: center;">Resultado</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">Escalar</td>
-<td style="text-align: center;">elementos individuais</td>
-<td style="text-align: center;">“AB”, 4, TRUE</td>
+<td style="text-align: center;">Maior que</td>
+<td style="text-align: center;">&gt;</td>
+<td style="text-align: center;">2 &gt; 1</td>
+<td style="text-align: center;">TRUE</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">Retangular</td>
-<td style="text-align: center;">dados organizados em <span class="math inline">\(i\)</span> linhas e <span class="math inline">\(j\)</span> colunas</td>
-<td style="text-align: center;">Vetores e Tabelas de Dados</td>
+<td style="text-align: center;">Maior ou igual que</td>
+<td style="text-align: center;">&gt;=</td>
+<td style="text-align: center;">2 &gt;= 2</td>
+<td style="text-align: center;">TRUE</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">Não-retangular</td>
-<td style="text-align: center;">junção de uma ou mais estruturas de dados</td>
-<td style="text-align: center;">Listas</td>
+<td style="text-align: center;">Menor que</td>
+<td style="text-align: center;">&lt;</td>
+<td style="text-align: center;">2 &lt; 3</td>
+<td style="text-align: center;">TRUE</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Menor ou igual que</td>
+<td style="text-align: center;">&lt;=</td>
+<td style="text-align: center;">5 =&lt; 3</td>
+<td style="text-align: center;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Igual à</td>
+<td style="text-align: center;">==</td>
+<td style="text-align: center;">4 == 4</td>
+<td style="text-align: center;">TRUE</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Diferente de</td>
+<td style="text-align: center;">!=</td>
+<td style="text-align: center;">5 != 3</td>
+<td style="text-align: center;">TRUE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">x <strong>e</strong> y</td>
+<td style="text-align: center;">&amp;</td>
+<td style="text-align: center;">x &lt;- c(1, 4, NA, 8) <br> x[!is.na(x) &amp; x &gt; 5]</td>
+<td style="text-align: center;">8</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">x <strong>ou</strong> y</td>
+<td style="text-align: center;">|</td>
+<td style="text-align: center;">x &lt;- c(1, 4, NA, 8) <br> x[!is.na(x) | x &gt; 5]</td>
+<td style="text-align: center;">1, 4, 8</td>
 </tr>
 </tbody>
 </table>
@@ -347,16 +421,36 @@ Tabela&nbsp;1.2: Formas pelas quais os dados podem ser organizados
 </figure>
 </div>
 </div>
-<p>[…]</p>
+</section>
+<section id="possíveis-complicações" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="possíveis-complicações"><span class="header-section-number">3.3</span> Possíveis complicações</h2>
+<p>Se você digitar um comando incompleto, como <code>5 +</code>, e apertar <code>Enter</code>, o R mostrará um <code>+</code>, o que não tem nada a ver com a adição da matemática. Isso significa que o R está esperando você enviar <strong>mais</strong> algum código para completar o seu comando. Termine o seu comando ou aperte <code>Esc</code> para recomeçar.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">-</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span> </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span> <span class="dv">5</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
+<p>Se você digitar um comando que o R não reconhece, ele retornará uma mensagem de erro. <strong>Não entre em pânico.</strong> Ele só está te avisando que não conseguiu interpretar o comando.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> % <span class="dv">2</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error: &lt;text&gt;:1:3: unexpected input
+1: 5 % 2
+      ^</code></pre>
+</div>
+</div>
+<p>Você pode digitar outro comando normalmente em seguida.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">^</span> <span class="dv">2</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 25</code></pre>
+</div>
+</div>
 
 
-</section>
-</section>
-<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn1"><p>Se o número de horas que a pessoa descansou for maior do que 8, então a variável deverá apresentar valor igual a <code>TRUE</code> – ou seja, é verdade que a pessoa dormiu mais de 8 horas. Caso contrário, <code>FALSE</code>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
 </section>
 
 </main> <!-- /main -->
@@ -771,11 +865,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./objetos.html" class="pagination-link" aria-label="Objetos">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Objetos</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./objetos.html" class="pagination-link" aria-label="Objetos">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Objetos</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

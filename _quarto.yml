@@ -17,6 +17,8 @@ book:
   
   chapters:
     - index.qmd
+    - objetos.qmd
+    - prim-passos.qmd
     
   downloads: [pdf, epub]
   sharing: [twitter, facebook]
