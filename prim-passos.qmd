@@ -18,9 +18,9 @@ De agora em diante, cada região sombreada de cinza representa código, ao passo
 
 Nesse caso, o nosso comando foi o código `1 + 1` e a saída foi o valor `2`. Como você pode reproduzir esse comando no RStudio? Inicialmente, copie o que está escrito acima ao clicar no símbolo de prancheta no canto superior direito da região sombreada. Na sequência, cole no Editor de Código e aperte `Ctrl + Enter` (ou então no Console, pressionando apenas `Enter`). Observe abaixo!
 
-``` {.content-visible when-format="html"}
+::: {.content-visible when-format="html"}
 ![](images/1mais1.gif){fig-align="center"}
-```
+:::
 
 Tente agora jogar no Console a expressão: `2 * 2 - (4 + 4) / 2`. Deu zero? Pronto! Você já é capaz de pedir ao R para fazer *qualquer uma das quatro operações aritméticas básicas*. Repare que as operações e suas precedências são mantidas como na matemática, ou seja, divisão e multiplicação são calculadas antes da adição e subtração, além de os parênteses ditarem a ordem na qual serão realizadas. A seguir, apresentamos a @tbl-ope-mat resumindo como fazer as principais operações no R.
 
