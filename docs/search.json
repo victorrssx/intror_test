@@ -1,0 +1,52 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "R e RStudio para Iniciantes",
+    "section": "",
+    "text": "1 Objects\n[…]",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Objects</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#footnotes",
+    "href": "index.html#footnotes",
+    "title": "R e RStudio para Iniciantes",
+    "section": "",
+    "text": "Se o número de horas que a pessoa descansou for maior do que 8, então a variável deverá apresentar valor igual a TRUE – ou seja, é verdade que a pessoa dormiu mais de 8 horas. Caso contrário, FALSE.↩︎",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Objects</span>"
+    ]
+  },
+  {
+    "objectID": "prim-passos.html",
+    "href": "prim-passos.html",
+    "title": "2  Primeiros passos",
+    "section": "",
+    "text": "2.1 Operadores Aritméticos\nDe agora em diante, cada região sombreada de cinza representa código, ao passo que seu resultado estará exposto logo na sequência. Vamos começar com um exemplo simples:\n1 + 1\n\n[1] 2\nNesse caso, o nosso comando foi o código 1 + 1 e a saída foi o valor 2. Como você pode reproduzir esse comando no RStudio? Inicialmente, copie o que está escrito acima ao clicar no símbolo de prancheta no canto superior direito da região sombreada. Na sequência, cole no Editor de Código e aperte Ctrl + Enter (ou então no Console, pressionando apenas Enter). Observe abaixo!\nTente agora jogar no Console a expressão: 2 * 2 - (4 + 4) / 2. Deu zero? Pronto! Você já é capaz de pedir ao R para fazer qualquer uma das quatro operações aritméticas básicas. Repare que as operações e suas precedências são mantidas como na matemática, ou seja, divisão e multiplicação são calculadas antes da adição e subtração, além de os parênteses ditarem a ordem na qual serão realizadas. A seguir, apresentamos a Tabela 2.1 resumindo como fazer as principais operações no R.\nTabela 2.1: Operadores matemáticos do R\n\n\n\n\n\n\nOperação\nOperador\nExemplo\nResultado\n\n\n\n\nAdição\n+\n1 + 1\n2.00\n\n\nSubtração\n-\n4 - 2\n2.00\n\n\nMultiplicação\n*\n2 * 3\n6.00\n\n\nDivisão\n/\n5 / 3\n1.67\n\n\nPotenciação\n^\n4 ^ 2\n16.00\n\n\nResto da Divisão\n%%\n5 %% 3\n2.00\n\n\nParte Inteira da Divisão\n%/%\n5 %/% 3\n1.00",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Primeiros passos</span>"
+    ]
+  },
+  {
+    "objectID": "prim-passos.html#operadores-lógicos",
+    "href": "prim-passos.html#operadores-lógicos",
+    "title": "2  Primeiros passos",
+    "section": "2.2 Operadores Lógicos",
+    "text": "2.2 Operadores Lógicos\nO R permite também testar comparações lógicas. Os valores lógicos básicos em R são TRUE (ou apenas T) e FALSE (ou apenas F). Por exemplo, podemos pedir ao R que nos diga se é verdadeiro que 5 é menor do que 3. Como a resposta é obviamente negativa, ele retornará FALSE, nos dizendo que a proposição que fizemos é falsa.\n\n5 &lt; 3\n\n[1] FALSE\n\n\nAbaixo, introduzimos a Tabela 2.2 com outros operadores lógicos da linguagem.\n\n\n\n\nTabela 2.2: Operadores lógicos do R\n\n\n\n\n\n\n\n\n\n\n\n\nOperação\nOperador\nExemplo\nResultado\n\n\n\n\nMaior que\n&gt;\n2 &gt; 1\nTRUE\n\n\nMaior ou igual que\n&gt;=\n2 &gt;= 2\nTRUE\n\n\nMenor que\n&lt;\n2 &lt; 3\nTRUE\n\n\nMenor ou igual que\n&lt;=\n5 =&lt; 3\nFALSE\n\n\nIgual à\n==\n4 == 4\nTRUE\n\n\nDiferente de\n!=\n5 != 3\nTRUE\n\n\nx e y\n&\nx &lt;- c(1, 4, NA, 8)  x[!is.na(x) & x &gt; 5]\n8\n\n\nx ou y\n|\nx &lt;- c(1, 4, NA, 8)  x[!is.na(x) | x &gt; 5]\n1, 4, 8",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Primeiros passos</span>"
+    ]
+  },
+  {
+    "objectID": "prim-passos.html#possíveis-complicações",
+    "href": "prim-passos.html#possíveis-complicações",
+    "title": "2  Primeiros passos",
+    "section": "2.3 Possíveis complicações",
+    "text": "2.3 Possíveis complicações\nSe você digitar um comando incompleto, como 5 +, e apertar Enter, o R mostrará um +, o que não tem nada a ver com a adição da matemática. Isso significa que o R está esperando você enviar mais algum código para completar o seu comando. Termine o seu comando ou aperte Esc para recomeçar.\n\n5 -\n+ \n+ 5\n\n[1] 0\n\n\nSe você digitar um comando que o R não reconhece, ele retornará uma mensagem de erro. Não entre em pânico. Ele só está te avisando que não conseguiu interpretar o comando.\n\n5 % 2\n\nError: &lt;text&gt;:1:3: unexpected input\n1: 5 % 2\n      ^\n\n\nVocê pode digitar outro comando normalmente em seguida.\n\n5 ^ 2\n\n[1] 25",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Primeiros passos</span>"
+    ]
+  }
+]
