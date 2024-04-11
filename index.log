@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2024.3.9)  11 APR 2024 18:00
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2024.3.9)  11 APR 2024 18:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1165,43 +1165,24 @@ LaTeX Warning: Reference `tbl-data-shapes' on page 3 undefined on input line 296
 ] [4]
 chapter 2.
 
-LaTeX Warning: Reference `tbl-data-types' on page 5 undefined on input line 380.
-
-[5
-
-]
-
-LaTeX Warning: Reference `tbl-data-shapes' on page 6 undefined on input line 428.
-
-[6]
-
-Package longtable Warning: Column widths have changed
-(longtable)                in table 2.3 on input line 505.
+LaTeX Warning: File `images/1mais1.gif' not found on input line 388.
 
 
-Package longtable Warning: Column widths have changed
-(longtable)                in table 2.4 on input line 533.
-
-[7] [8]
-
-LaTeX Warning: File `images/criando_objeto.gif' not found on input line 632.
-
-
-! LaTeX Error: File `images/criando_objeto.gif' not found.
+! LaTeX Error: File `images/1mais1.gif' not found.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.632 ...t=\textheight]{images/criando_objeto.gif}
-                                                   
+l.388 \includegraphics{images/1mais1.gif}
+                                          
 Here is how much of TeX's memory you used:
- 38524 strings out of 476771
- 794938 string characters out of 5800904
- 1937842 words of memory out of 5000000
- 59995 multiletter control sequences out of 15000+600000
+ 38592 strings out of 476771
+ 796270 string characters out of 5800904
+ 1933842 words of memory out of 5000000
+ 60063 multiletter control sequences out of 15000+600000
  567453 words of font info for 111 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 108i,9n,121p,10900b,484s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 108i,9n,121p,10900b,924s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on index.pdf (8 pages).
+Output written on index.pdf (4 pages).
