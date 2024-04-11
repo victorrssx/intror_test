@@ -1,0 +1,349 @@
+# Objetos
+
+Na apresentação dessa parte do material, trouxemos uma citação que, em parte, dizia:
+
+> ***Everything that exists is an object.***
+
+**Um objeto é simplesmente um nome que guarda um valor ou código.** Não há como ser mais direto: tudo que existe no R é um *objeto, inclusive as funções que veremos no capítulo seguinte*. Nesse capítulo, veremos com detalhe os objetos que são designados à *armazenar dados*. Antes, no entanto, vamos dar um passo para trás e explicar o que são dados.
+
+## Dados
+
+Segundo a Oxford Languages, dados são
+
+> fatos e estatísticas coletadas de forma conjunta para referência ou análise.
+
+**Na prática, dados nos mostram informações sobre determinado indivíduo ou situação que procuramos descrever, seja uma pessoa, instituição, comportamento, condição geográfica, etc.** O número de horas que você dormiu essa noite é um dado. A lista que relata quem é ou não calvo na sua família é uma *coleção* de dados. A expectativa, hoje, de quanto será a inflação acumulada nos próximos 12 meses é um dado. A variação percentual do Produto Interno Bruto (PIB) real no último trimestre é um dado. A lista que mostra a sequência de variações do PIB real nos últimos dez trimestres é uma *série temporal*, isto é, dados em sequência ao longo do tempo.
+
+### Tipo & Forma
+
+Vamos nos aprofundar um pouco mais. Ao lidar formalmente com dados, **devemos ter mente que eles são compostos por uma ou mais variáveis e seus valores**. *Uma variável é uma dimensão ou propriedade que descreve uma unidade de observação* (por exemplo, uma pessoa) e normalmente pode assumir valores diferentes. Por outro lado, os *valores são as instâncias concretas que uma variável atribui a cada unidade de observação e são ainda caracterizados por seu intervalo* (por exemplo, valores categóricos versus valores contínuos) *e seu tipo* (por exemplo, valores lógicos, numéricos ou de caracteres). Estaremos interessados no *tipo* dos dados. A @tbl-data-types apresenta os que podem aparecer com maior frequência.
+
+```{r}
+#| label: tbl-data-types
+#| echo: false
+#| message: false
+#| tbl-cap: Tipos mais comuns de dados
+
+data.frame(tipo = c("Númerico", 
+                    "Texto *(string)*", 
+                    "Lógico", 
+                    "Tempo"),
+           
+           descricao = c("números do tipo *integer* (inteiro) ou *double* (reais)",
+                         "caracteres (letras, palavras ou setenças)", 
+                         "valores verdade do tipo lógico (valores booleanos)",
+                         "datas e horas"),
+           
+           exemplo = c("1, 3.2, 0.89", 
+                       "\"Ana jogou bola\"",
+                       "TRUE, FALSE, NA", 
+                       "14/04/1999")) |> 
+  
+  knitr::kable(align = "c", 
+               col.names = c("Tipo", "Serve para representar...", "Exemplo"))
+```
+
+Voltando ao primeiro exemplo, uma pessoa pode ser descrita pelas variáveis *nome*, *número de horas dormidas* e *se dormiu ou não mais de oito horas*. Os valores correspondentes a essas variáveis seriam do tipo texto (por exemplo, “Pedro”), numéricos (número de horas) e lógicos (`TRUE` ou `FALSE`, definido em função do tempo descansado[^objetos-1]). **Note a diferença entre *dado* e *valor*.** O número 10 é um valor, sem significado. Por outro lado, *"10 horas dormidas"* é um dado, caracterizado pelo valor 10 e pela variável *"horas dormidas"*.
+
+[^objetos-1]: Se o número de horas que a pessoa descansou for maior do que 8, então a variável deverá apresentar valor igual a `TRUE` – ou seja, é verdade que a pessoa dormiu mais de 8 horas. Caso contrário, `FALSE`.
+
+Outro aspecto importante sobre os dados está em sua forma, ou seja, como os dados podem ser organizados. A @tbl-data-shapes apresenta as formas mais comuns de organização.
+
+```{r}
+#| label: tbl-data-shapes
+#| echo: false
+#| message: false
+#| tbl-cap: Formas pelas quais os dados podem ser organizados
+
+data.frame(formato = c("Escalar", 
+                       "Retangular",
+                       "Não-retangular"),
+           
+           descricao = c("elementos individuais",
+                         "dados organizados em $i$ linhas e $j$ colunas", 
+                         "junção de uma ou mais estruturas de dados"),
+           
+           exemplo = c("\"AB\", 4, TRUE", 
+                       "Vetores e Tabelas de Dados",
+                       "Listas")) |> 
+  
+  knitr::kable(align = "c", 
+               col.names = c("Formato", "Os dados se apresentam como...", "Exemplo"))
+```
+
+Um escalar é um elemento único, que pode ser de qualquer tipo. Ou seja, a representação elementar de um dado se dá através de um escalar! Por exemplo, o tipo sanguíneo de determinada pessoa, representado pelos caracteres "AB", é um escalar do tipo texto. Você pode pensar no escalar como um dado organizado em 1 linha e 1 coluna.
+
+Por sua vez, dados retangulares são àqueles cuja organização ocorre em $i$ linhas e $j$ colunas, tal que $i,j \in \mathbb{N}$ e $i > 1$ ou $j > 1$. As formas retangulares mais comuns são *vetores*, *matrizes* e *tabelas de dados*. Uma matriz é uma forma de organização de dados *númericos* em em $i$ linhas e $j$ colunas. Quando uma matriz possui $i$ linhas e $1$ coluna *ou* $1$ linha e $j$ colunas, chamamos de vetor-coluna e vetor-linha, respectivamente; em muitos casos, chamamos apenas de *vetor*. Assim, o vetor é um caso especial de matriz unidimensional. As tabelas de dados, por outro lado, possuem $i$ linhas e $j$ colunas, tal que $i > 1$ e $j > 1$. Além disso, aceitam todos os tipos de dado -- por exemplo, númericos, de textos ou lógicos -- em qualquer que seja a combinação de linha e coluna.
+
+Por sua vez, dados não-retangulares se referem a toda organização de dados que não seja feita em linhas e colunas relacionadas entre si. A forma mais comum é a lista. Observe um exemplo abaixo: cada característica pode ser entendida como um elemento de uma lista. Apesar de pertencerem a mesma estrutura, os elementos não se comunicam entre si.
+
+```{r}
+#| echo: false
+
+matrix(c("&nbsp;", "&nbsp;", "Gênero", "&nbsp;", "&nbsp;", "Idade", "&nbsp;", "&nbsp;", "Altura (cm)", "&nbsp;", "&nbsp;", "Peso (kg)", "&nbsp;",
+         
+         "&nbsp;", "Jorge", "Masculino", "&nbsp;", "Jorge", "18", "&nbsp;", "Jorge", "180", "&nbsp;", "Jorge", "76", "&nbsp;",
+         
+         "&nbsp;", "Laís", "Feminino", "&nbsp;", "Laís", "23", "&nbsp;", "Laís", "170", "&nbsp;", "Laís", "65", "&nbsp;",
+         
+         "&nbsp;", "Matheus", "Masculino", "&nbsp;", "Matheus", "22", "&nbsp;", "Matheus", "170", "&nbsp;", "Matheus", "70", "&nbsp;",
+         
+         "&nbsp;", "Laura", "Feminino", "&nbsp;", "Laura", "21", "&nbsp;", "Laura", "175", "&nbsp;", "Laura", "68", "&nbsp;",
+         
+         "&nbsp;", "Nathália", "Feminino", "&nbsp;", "Nathália", "21", "&nbsp;", "Nathália", "168", "&nbsp;", "Nathália", "66", "&nbsp;"), 
+       
+       nrow = 13, ncol = 6) |>
+  knitr::kable()
+```
+
+Nesse caso em específico, conseguimos fazer a transição para uma tabela (forma retangular) pois todos os elementos são são características das mesmas pessoas. Em uma tabela de dados, automaticamente temos uma relação entre os dados: cada linha contém características de uma unidade específica.
+
+```{r}
+#| label: tbl-tabela-retangular
+#| echo: false
+#| tbl-cap:  
+
+data.frame(Nome = c("Jorge", "Laís", "Matheus", "Laura", "Nathália"),
+           Gênero = c("Masculino", "Feminino", "Masculino", "Feminino", "Feminino"),
+           Idade = c(18, 23, 22, 21, 21),
+           Altura = c(180, 170, 175, 181, 168),
+           Peso = c(76, 65, 70, 68, 66)) |> 
+knitr::kable(col.names = c("Nome", "Gênero", "Idade", "Altura (cm)", "Peso (kg)"), align = "c")
+```
+
+## Estruturas de Dados no R
+
+Na seção anterior, vimos os conceitos de *tipo* e *forma*. Tenha em mente que são duas definições que existem independentemente de qualquer linguagem de programação – elas versam sobre *dados* de forma geral.
+
+Por outro lado, agora veremos o conceito e alguns exemplos de *estrutura de dados* para o R. **A estrutura de dados é a forma pela qual o R classificará um objeto em relação ao *tipo* e a *forma* dos dados que contém.** Existe uma estrutura de dados para cada combinação de tipo e forma? **Não.** Compreender as principais estruturas disponíveis no R requer vê-las como uma combinação de
+
+(a) *algum* formato de dados
+(b) o fato de conterem um único ou vários tipos de dados
+
+### Criando e armazenando objetos na memória
+
+Antes de conhecê-las, no entanto, vamos entender melhor os comandos para criar e armazenar *qualquer* objeto (seja ele para armazenar dados, como nesse capítulo, ou para criar funções, que serão vistas no próximo) na memória do R.
+
+Para *criar* e *armazenar* um objeto, sempre escreveremos inicialmente seu nome (escolhido por você), seguido de um dos *operadores* *de atribuição* (ou *assingment operators*, como são conhecidos) e, por fim, o objeto propriamente dito com as informações de nosso interesse. O principal operador de atribuição para se criar objetos é `<-`. Outro operador que é comumente utilizado para cumprir a mesma tarefa é `=`. Ainda que exista uma leve diferença entre ambos, ao longo dos cursos será possível utilizar o operador de sua preferência. Por ser o ideal, utilizaremos `<-` no restante do material.
+
+```{r, eval=FALSE}
+nome_do_objeto <- >objeto com informações<
+  
+nome do objeto =  >objeto com informações<
+```
+
+No parágrafo anterior, observe que está escrito *'criar e armazenar'*. Nós poderíamos simplesmente criar um objeto, sem armazená-lo na memória do R. Nesse caso, não teríamos o nome do objeto disponível na aba **Environment** (ou seja, ele não seria armazenado no nosso ambiente de trabalho) e seria bem mais complicado registrar todas as mudanças que viermos a fazer nele. Aconteceria apenas a ocorrência de uma única saída no Console com a estrutura do objeto criado (de forma semelhante ao que fizemos no capítulo anterior) – o quê não tem grande utilidade para nós, exceto caso você queira verificar a estrutura do objeto antes de realmente armazená-lo.
+
+Ao mesmo tempo, você irá perceber que a *criação e armazenamento de um objeto não implica sua visualização imediata*. Isso signfinica que, ao dar o comando para criar algum objeto, não acontecerá nada no Console. Você pode acabar achando que o processo falhou ou algo do tipo, mas não é nada disso! Como dissemos, a mudança ocorrerá na aba Environment, onde deverá aparecer o nome do novo objeto. Para visualizar o objeto criado, escreva seu nome e rode a linha de código. Agora sim o objeto aparecerá no Console.
+
+```{r, eval=FALSE}
+nome_do_objeto
+```
+
+Se você criou e armazenou um objeto na memória, ele ficará por lá até que você encerre sua sessão atual (feche o RStudio) ou, então, que o remova. Para remover qualquer objeto basta escrever `rm(nome_do_objeto)`. Caso tenha o desejo de remover vários objetos, basta separar seus nomes com vírgula. Para remover *todos* os objetos que aparecem na aba Environment, use `rm(list = ls())`.
+
+```{r, eval=FALSE}
+rm(nome_do_objeto1)
+
+rm(nome_do_objeto1, nome_do_objeto2, ...)
+
+rm(list = ls())
+```
+
+Observe no GIF abaixo como é na prática!
+
+![](images/criando_objeto.gif){fig-align="center" width="620"}
+
+### Valor único
+
+Ao criar um objeto com valor único, estamos armazenando um escalar que pode variar quanto ao tipo (por exemplo, númerico, *string* ou valor lógico). Nesse caso, a *estrutura* do objeto *será idêntica* ao *tipo* -- o que faz sentido, afinal estamos falando de um objeto de uma única linha e coluna.
+
+#### Numérico
+
+Um objeto **númerico** contém apenas um número (por exemplo, 1, 2, 4.13, $\pi$, entre outros). Se quisessemos atribuir o valor numérico 5 à um objeto chamado `x`, como poderiamos fazer? Observe abaixo e replique no seu RStudio!
+
+```{r}
+x <- 5 
+```
+
+Note que o Console não retorna nenhuma mensagem ou valor. Como dissemos na seção anterior, a única diferença que você deve ser capaz de observar é no painel Environment, no quadrante superior direito do RStudio. O nome do novo objeto aparecerá lá. Para que você possa visualizar o conteúdo do objeto criado, terá que escrever apenas seu nome e rodar a linha de código!
+
+```{r}
+x
+```
+
+#### Textual
+
+Uma **sequência de caracteres** (*character string*, ou apenas *string*) é um conjunto de caracteres dentro de um par de aspas e pode ou não incluir espaços. Por exemplo, “elevada” e “pressão arterial elevada” são objetos de caracteres com um único valor de *string*.
+
+```{r}
+y <- "pressão arterial elevada" 
+y
+```
+
+### Vetor
+
+Um **vetor** contém uma coleção ordenada de dados indexados pelos inteiros $1, 2,..., n$, onde $n$ é o comprimento do vetor. *O vetor como estrutura de dados é a combinação da forma vetor com dados de um único tipo, não necessariamente numérico.* No exemplo abaixo, um vetor númerico, isto é, que contém apenas números.
+
+```{r}
+z <- c(5, 8, 12) 
+z
+```
+
+**Se você tentar criar um vetor contendo dois tipos de dados diferentes, ele converterá todos os dados para o tipo texto.** A única exceção é com relação a entradas do tipo lógico `NA` *(Not Available)*, que representam a ausência de determinado dado.
+
+```{r}
+z <- c(5, "texto", TRUE, NA)
+z
+```
+
+É inegável que, a partir deste ponto, as estruturas começam a ficar mais interessantes. Lembre-se que o vetor tem uma dimensão e pode ter muitas informações armazenadas. É natural que, em determinadas situações, desejemos acessar apenas valores específicos dentre os que constam nele.
+
+Como podemos fazer isso? Note que podemos associar a cada elemento de um vetor um número, representando a linha ou coluna em que consta. A esse número chamamos de índice! Dessa forma, fica fácil acessar qualquer um de seus valores. Basta escrever, ao lado de seu nome e entre colchetes, o índice que está associado à este valor. Por exemplo, vamos acessar o segundo elemento do vetor `z` que acabamos de criar.
+
+```{r}
+z[2] # Acessando o segundo elemento de um vetor
+```
+
+::: {.callout-tip collapse="true"}
+## Outras formas de criar vetores (Opcional)
+
+```{r}
+1:7                # Criando uma sequência de números de 1 a 7
+seq(2, 10, by = 2) # Criando um sequência de 2 a 10 pulando um número. 
+rep(3, 5)          # Repetindo o número 3, 5 vezes 
+rep(c(1,2), 3)     # Repetindo o vetor (1,2), 3 vezes
+```
+:::
+
+#### Fator
+
+Um **fator** é um tipo especial de vetor que contém valores numéricos subjacentes $1, 2,..., n$, mas cada um desses $n$ valores possui um rótulo de texto associado (que pode ou não ser o valor numérico). Esses valores rotulados são os **níveis** *(levels)* do fator. Um uso comum de um fator é armazenar uma variável categórica. **Depois de criar um vetor de fator com níveis específicos, nenhum elemento desse vetor poderá assumir um valor que não seja um de seus níveis pré-atribuídos.**
+
+Você pode criar um fator a partir de um vetor de caracteres e o R assumirá que os valores únicos são os rótulos dos níveis. Por exemplo, no exemplo abaixo os níveis serão "lento", "normal" e "rápido".
+
+```{r}
+y <- factor(c("super rápido", "super lento", "normal", "super rápido", "normal"))
+y         # Rodar o vetor de fator também irá retornar os níveis
+```
+
+Se quiser alterar os rótulos, você pode fazê-lo atribuindo um novo valor aos seus níveis. Por exemplo, suponha que queiramos que os rótulos sejam maiúsculos.
+
+```{r}
+levels(y) <- c("Super Rápido", "Normal", "Super Lento") 
+levels(y)
+```
+
+Como alternativa, você pode atribuir novos rótulos de nível ao criar o fator. Isso tem a vantagem adicional de permitir que você decida em que ordem os níveis devem aparecer. Quando criamos o fator, R atribuiu automaticamente os níveis pegando os valores exclusivos de `y` e colocando-os em ordem alfabética. Por vários motivos (como criar um gráfico de barras posteriormente), você pode querer que os níveis estejam em uma ordem diferente. **Você pode especificar a ordem dos níveis ao criar a variável, mas tome cuidado porque se você deixar de fora um valor que aparece nos dados esse valor acabará definido como ausente (**`NA`**)**.
+
+No exemplo anterior, gostaríamos que a ordem fosse da velocidade menor para o maior.
+
+```{r}
+# Enter ORIGINAL values in levels 
+# Enter the NEW level labels in labels 
+# Make sure the orderings of levels and labels correspond 
+y <- factor(c("super rápido", "super lento", "normal", "super rápido", "normal"),              
+            levels = c("super lento", "normal", "super rápido"), 
+            labels = c("Super Lento", "Normal", "Super Rápido")) 
+levels(y)
+y
+
+```
+
+### Matriz
+
+Uma **matriz** contém uma coleção bidimensional de dados indexados por pares de inteiros $(i, j)$. *A matriz como estrutura de dados é a combinação da forma matriz com dados de um único tipo, não necessariamente numérico.* Abaixo, uma matriz numérica.
+
+```{r}
+x <- matrix(c(1,2,3,4,5,6), nrow = 2, ncol = 3) 
+x
+```
+
+Assim como os vetores, as matrizes não podem conter valores de diferentes tipos. Se você tentar criar uma matriz contendo valores numéricos e de caracteres, por exemplo, ela converterá os valores numéricos em caracteres. Note que você pode definir o número de linhas e colunas que uma matriz venha a possuir.
+
+```{r}
+z <- matrix(c(1,2,"c","d","e","f"), nrow = 3, ncol = 2) 
+z
+
+z <- matrix(c(1,2,"c","d","e","f"), nrow = 2, ncol = 3) 
+z
+```
+
+É importante ressaltar que, no R, uma matriz criada com $i$ linhas e $1$ coluna (ou $1$ linha e $j$ colunas) continua sendo interpretada como uma matriz, ao invés de ser interpretada como vetor-coluna (ou vetor-linha).
+
+Como a matriz é um objeto de natureza bidimensional, podemos acessar seus elementos individuais através da inserção dos seus índices de linha *e* coluna. Por exemplo, para acessar o elemento presente na segunda linha e terceira coluna da matriz `z` que aramazenamos por último, rode:
+
+```{r}
+z[2,3]
+```
+
+Outra forma de acessar algum dado específico da matriz é pensá-la como sendo um único vetor, o qual vai sendo repartido conforme termina o tamanho que você pré-selecionou paras colunas. Dessa forma, podemos retornar determinado elemento pensando em seu índice de vetor. Por exemplo, poderíamos acessar o dado `f` pensando que é o sexto elemento do equivalente ao vetor `c("a","b","c","d","e","f")`.
+
+```{r}
+z[6]
+```
+
+Ao mesmo tempo, podemos acessar apenas uma coluna ou linha específica. Para tal, selecione a coluna ou linha que deseja retornar e deixe a coordenada restante como espaço vazio. No código abaixo, vamos selecionar inicialmente a primeira linha da matriz `z` e, na sequência, sua terceira coluna.
+
+```{r}
+z[1,]
+z[,3]
+```
+
+### Data frame
+
+Como matrizes (e vetores) contêm dados de apenas um tipo (por exemplo, todas as células são dados numéricos, de caracteres ou lógicos), precisamos de outra estrutura de dados para dados heterogêneos.
+
+A necessidade de armazenar dados heterogêneos não é nada exótico ou incomum. Na verdade, mesmo os conjuntos de dados mais simples exigem a mistura de vários tipos de dados. Por exemplo, imagine que queremos armazenar um conjunto de dados que contém informações básicas sobre um grupo de pessoas, assim como na @tbl-tabela-retangular. Cada uma dessas cinco variáveis pode ser armazenada como um vetor (as duas primeiras do tipo caractere, as outras do tipo numérico). Para armazenar todas as cinco variáveis em uma única estrutura de dados, podemos combinar os cinco vetores em uma tabela retangular. As tabelas são a forma mais frequente de armazenar dados!
+
+E qual o nome da estrutura de dados que armazena tabelas de dados no R? São os *data frames! O data frame como estrutura de dados é a combinação da forma tabela e da presença de qualquer tipo de dado.* No *chunk* abaixo, vamos recriar a @tbl-tabela-retangular como exemplo.
+
+```{r}
+info_pessoas <- data.frame(Nome = c("Jorge", "Laís", "Matheus", "Laura", "Nathália"),
+                           Gênero = c("Masculino", "Feminino", "Masculino", "Feminino", "Feminino"),
+                           Idade = c(18, 23, 22, 21, 21),
+                           Altura = c(180, 170, 175, 181, 168),
+                           Peso = c(76, 65, 70, 68, 66))
+
+info_pessoas
+```
+
+Você pode acessar qualquer dado específico de um *data frame* a partir do mesmo procedimento utilizado com matrizes. Por exemplo, para acessar o dado contido na segunda linha da primeira coluna, basta rodar `info_pessoas[2,1]`.
+
+```{r}
+info_pessoas[2,1]
+```
+
+De forma semelhante, podemos acessar uma coluna ou linha específica.
+
+```{r}
+info_pessoas[,2] # Retornando dados da segundo coluna
+```
+
+```{r}
+info_pessoas[1,] # Retornando dados da primeira linha
+```
+
+É interessante notar que um *data frame* pode ser pensado como a junção de múltiplos vetores-coluna, cada um representando determinada variável! Isso nos dá outra forma de selecionar colunas específicas: basta colocar entre colchetes o índice do vetor-coluna que você deseja selecionar. Note, no entanto, uma diferença: nesta *sintaxe*, o objeto que retornará ainda terá estrutura de um *data frame* (agora com cinco linhas e uma coluna) ao invés de vetor, como no *chunk* anterior.
+
+```{r}
+info_pessoas[2]
+```
+
+### Lista
+
+Uma lista contém uma coleção ordenada de objetos, sendo que estes podem ser de tipos diferentes. *A lista como estrutura de dados é a combinação da forma lista (representando dados não-retangulares) e da presença de qualquer tipo de dado.* Na prática, uma lista pode aceitar **qualquer** objeto de dados como elemento -- inclusive uma outra lista!
+
+Para que fique mais claro, abaixo está uma lista que contém um objeto com cada tipo de estrutura vista até agora! Colocamos nesta lista um valor único, um vetor, uma matriz e um data frame. Eles serão armazenados em um novo objeto, que nomeamos de `lista_exemplo`.
+
+```{r}
+lista_exemplo <- list("5", c(1,2,3), matrix(c(2,2,3,4), 2, 2), info_pessoas)
+```
+
+Observe que a lista, apesar de poder contar com objetos de várias estruturas (e, consequentemente, dimensões), acaba por ter uma única dimensão. Você pode acessar seus elementos de forma *parecida* com o caso de um vetor. A diferença é que, no caso de uma lista, teremos que utilizar duplo colchetes. Abaixo, um exemplo de como acessar o quarto elemento da `lista_exemplo` -- no caso, o *data frame* `info_pessoas` que criamos anteriormente.
+
+```{r}
+lista_exemplo[[4]]
+```
+
+Listas são mais úteis do que você pode estar pensando nesse momento. Elas permitem que você agrupe objetos de um mesmo assunto, mas com diferentes estruturas, em um único objeto 'central'. Em muitos casos, facilita a organização.
