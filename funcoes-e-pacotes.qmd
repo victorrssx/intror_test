@@ -35,7 +35,52 @@ Vamos deixar os conceitos mais claros. Imagine que te propronho a seguinte regra
 
 Perceba que definimos a função acima de modo *verbal*, ou seja, com palavras. Poderíamos também descrevê-la numericamente através de uma tabela ou, então, de forma visual com um gráfico (ambas abaixo). De todo modo, a forma mais comum de se descrever uma função é através de sua *fórmula* que, no nosso exemplo, seria $f(x)=2/x$.
 
+:::: {layout="[0.4, 0.05, 0.55]"}
 
+:::{#firstcol}
+```{r}
+#| echo: false
+#| warning: false
+
+library(knitr)
+library(kableExtra)
+library(magrittr)
+
+knitr::kable(
+  data.frame(x = seq(-3, 3, 1)[-4],
+             f_x = 2 / seq(-3, 3, 1)[-4]) %>% round(2),
+  col.names = c("$x$", "$f(x)$"),
+  format = "simple", table.attr = 'data-quarto-disable-processing="true"', escape = FALSE, align = 'c') %>% 
+  kable_styling(bootstrap_options = c("basic", "hover"), full_width = F, position = "center")
+```
+:::
+
+:::{#secondcol}
+<!-- empty column to create gap -->
+:::
+
+:::{#thirdcold}
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+library(ggplot2)
+
+ggplot(data.frame(x = seq(-3, 3, 1)[-4]), aes(x)) +
+  geom_function(fun = function(x) {ifelse(x == 0, NA, 2/x)}, linewidth = 0.8) +
+  geom_vline(xintercept = 0) +
+  geom_hline(yintercept = 0) +
+  labs(x = "", y = "") +
+  theme(panel.background = element_blank(),
+        axis.text.x = element_blank(),
+        axis.text.y = element_blank())
+
+```
+:::
+
+::::
 
 Não precisamos nos aprofundar nos conceitos. **O que você precisa guardar dessa seção é o fato de podermos pensar na função como uma *caixa preta* que, ao receber elementos de** $A$, **os transforma em um determinado valor *(output)* presente em** $B$. Como vimos, a forma pela qual essa 'caixa preta' irá transformar $x$ em $f(x)$ é a nossa regra propriamente dita.
 
