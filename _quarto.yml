@@ -19,6 +19,7 @@ book:
     - index.qmd
     #- objetos.qmd
     - prim-passos.qmd
+    - funcoes-e-pacotes.qmd
     
   downloads: [pdf, epub]
   sharing: [twitter, facebook]
