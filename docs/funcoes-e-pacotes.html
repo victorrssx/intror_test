@@ -102,6 +102,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Procurar"
   }
 }</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -303,6 +306,22 @@ window.Quarto = {
 <section id="o-que-é-uma-função-para-o-r" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="o-que-é-uma-função-para-o-r"><span class="header-section-number">3.2</span> O que é uma função <strong>para o R</strong>?</h2>
 <p>E por quê essa historinha toda sobre funções matemáticas nos interessa? Simplesmente pois podemos traçar um paralelo com o conceito de função para a linguagem R! <strong>No R, uma função é um objeto que recebe argumentos <em>(inputs)</em> e executa uma ação sobre ou a partir deles, de acordo com o bloco de código nela embutido, te devolvendo um determinado resultado <em>(output)</em>. A lógica é a mesma de uma função matemática!</strong> O nome não é por acaso.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  A(Input 1) --&gt; D["Caixa Preta \n (Função)"]
+  B(Input 2) --&gt; D["Caixa Preta \n (Função)"]
+  C(Input N) --&gt; D["Caixa Preta \n (Função)"]
+  D --&gt; E[Output]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 <p>De certa forma, continuamos a ter um domínio, pois cada função atende um número específico de estruturas de objeto e/ou tipos de variável – algumas funções podem aceitar apenas vetores como argumento, por exemplo, enquanto outras podem ser específicas para variavéis númericas. Ao mesmo tempo, continuamos a ter uma imagem, associada aos resultados possíveis. E qual é o equivalente à regra? É o <em>bloco de código embutido na função!</em></p>
 <section id="vantagens" class="level3" data-number="3.2.1">
 <h3 data-number="3.2.1" class="anchored" data-anchor-id="vantagens"><span class="header-section-number">3.2.1</span> Vantagens</h3>

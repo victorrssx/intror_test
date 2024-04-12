@@ -43,7 +43,17 @@ Não precisamos nos aprofundar nos conceitos. **O que você precisa guardar dess
 
 E por quê essa historinha toda sobre funções matemáticas nos interessa? Simplesmente pois podemos traçar um paralelo com o conceito de função para a linguagem R! **No R, uma função é um objeto que recebe argumentos *(inputs)* e executa uma ação sobre ou a partir deles, de acordo com o bloco de código nela embutido, te devolvendo um determinado resultado *(output)*. A lógica é a mesma de uma função matemática!** O nome não é por acaso.
 
+::: {.content-visible when-format="html"}
+```{mermaid}
+%%| fig-align: center
 
+flowchart LR
+  A(Input 1) --> D["Caixa Preta \n (Função)"]
+  B(Input 2) --> D["Caixa Preta \n (Função)"]
+  C(Input N) --> D["Caixa Preta \n (Função)"]
+  D --> E[Output]
+```
+:::
 
 De certa forma, continuamos a ter um domínio, pois cada função atende um número específico de estruturas de objeto e/ou tipos de variável -- algumas funções podem aceitar apenas vetores como argumento, por exemplo, enquanto outras podem ser específicas para variavéis númericas. Ao mesmo tempo, continuamos a ter uma imagem, associada aos resultados possíveis. E qual é o equivalente à regra? É o *bloco de código embutido na função!*
 
